@@ -29,6 +29,25 @@ class App extends React.Component{
     })
   }
 
+  handleToyForm = (e, formData) => {
+    e.preventDefault()
+    const toy = {...formData, likes: 0}
+
+    fetch(toys_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify(toy)
+    }).then(resp => resp.json())
+    .then (toy => {
+      const toys = [...this.state.toys, toy]
+      this.setState[ {toys} ]
+      this.handleClick()
+    })
+  }
+
   render(){
     return (
       <>
