@@ -5,11 +5,21 @@ import Header from './components/Header'
 import ToyForm from './components/ToyForm'
 import ToyContainer from './components/ToyContainer'
 
+const toys_URL = "http://localhose:3000/toys"
 
 class App extends React.Component{
 
   state = {
-    display: false
+    display: false,
+    toys: [],
+  }
+
+  componentDidMount() {
+    fetch(toys_URL)
+    .then(resp => resp.json())
+    .then(toys => {
+      this.setState({ toys })
+    })
   }
 
   handleClick = () => {
